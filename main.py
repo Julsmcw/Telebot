@@ -29,12 +29,12 @@ def convert(message: telebot.types.Message):
         values = message.text.split(' ')
 
         if len(values) != 3:
-            raise ExchangeException('Слишком много параметров.')
+            raise ExchangeException('Не верное значение параметров.')
 
         quote, base, amount = values
         total_base = Exchange.get_price(quote, base, amount)
     except ExchangeException as e:
-        bot.reply_to(message,f'Ошибка пользователя\n{e}')
+        bot.reply_to(message,f'Попробуйте еще раз\n{e}')
     except Exception as e:
         bot.reply_to(message, f'Не удалось обработать команду\n{e}')
     else:
